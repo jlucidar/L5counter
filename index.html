@@ -1,0 +1,112 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+  <head>
+    <title>L5 Departure</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<style media="screen" type="text/css">
+		body{
+			background-image:url("./3.png");
+			background-repeat: no-repeat;
+    	background-size: cover;
+		}
+
+		@font-face {
+    font-family: "Calculator";
+    src: url(./Calculator.ttf) format("truetype");
+		}
+
+		@font-face {
+    font-family: "Roboto-Regular";
+    src: url(./Roboto-Regular.ttf) format("truetype");
+		}
+
+		.main{
+			width:1000px;
+			height:150px;
+			position:absolute;
+			left:50%;
+			top:63%;
+			margin:-45px 0 0 -500px;
+		}
+
+		.intro{
+			color:white;
+			text-align: center;
+			font-weight: bold;
+			font-size:4vw;
+			font-family:"Calculator";
+		}
+
+		#temps{
+			color:white;
+			text-align: center;
+			font-size:3vw;
+			font-family:"Roboto-Regular";
+		}
+
+		.slogan{
+			color:white;
+			text-align: center;
+			font-size:6vw;
+			font-family:"Calculator";
+		}
+
+		</style>
+
+    <script type="text/javascript" src="./jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+    var compteur;	
+
+	  $(document).ready(function(){
+	  	lancerCompteur();
+	  });       
+
+
+    function lancerCompteur(){
+	    compteur = setInterval(actualiserCompteur,10);
+    }
+
+    function actualiserCompteur(){
+	    var jours = 0;
+	    var heures = 0;
+	    var minutes = 0;
+	    var secondes = 0;
+
+			var myCurrentDate = new Date();
+			var dateNDL5 = new Date("28 January 2016 18:00:00");
+			var ecart = dateNDL5 - myCurrentDate;
+			if(ecart<0)ecart=0;
+			ecart = ecart / 1000;
+
+	    jours = parseInt(ecart / 86400);
+
+	    heures = parseInt((ecart % 86400) / 3600);
+
+	    minutes = parseInt((ecart % 3600) / 60);
+
+	    secondes = ecart % 60;
+	    var div = document.getElementById("temps");
+	    var texte = document.createTextNode(jours + " Day"+ (jours!==1?"s ":" ") + heures + " Hour" + (heures!==1?"s ":" ") + minutes + " Minute" + (minutes!==1?"s ":" ")+  secondes.toFixed(2) + " Second"+(secondes!==1?"s ":" "));
+
+	    if (div.firstChild !== null)
+	      div.removeChild(div.firstChild);
+	    div.appendChild(texte);
+    }
+                        
+                </script>
+        </head>
+        <body>
+        	<div class="main">
+        		<div class="intro">Departure in : </div>
+        		<br/>
+		        <div id="temps"></div>
+		        <!--
+
+		        <div class='slogan'>Approved by M. Husson, bitches.</div>
+		        -->
+		        <div class='slogan'>Eat the datasheet, bitches.</div>
+		        
+	        </div>
+        </body>
+        
+</html> 
